@@ -91,9 +91,13 @@ const InitialErrorState = {
   mobile: false,
 }
 
+// matches at least 6 characters with at least 1 upper case, 1 lower case and 1 number
 const passwordPattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}$/
+// matches email addresses with @ and .
 const emailPattern = /^([^\s@]+@[^\s@]+\.[^\s@]+)$/
+// matches only numbers, for mobile
 const numberPattern = /^[0-9]*$/
+//matches only alphabets, for name
 const alphabetPattern = /^[A-Za-z]+$/
 
 export const Default = () => {
@@ -101,6 +105,7 @@ export const Default = () => {
   const [errorState, setErrorState] = useState<ErrorState>(InitialErrorState)
   const [success, setSuccess] = useState(false)
 
+  // set state for respective input fields. If the field already has an error, check if the error still exists, if not, remove it
   const onChange = (event: any, type: string) => {
     setFormState((prev) => {
       return { ...prev, [type]: event.target.value }
@@ -120,12 +125,14 @@ export const Default = () => {
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
 
+    // check all fields
     checkError("email")
     checkError("password")
     checkError("confirmPassword")
     checkError("name")
     checkError("mobile")
 
+    // if any field has an error, state remains false, if no errors set succes to true
     if (
       checkError("email") ||
       checkError("password") ||
@@ -145,6 +152,7 @@ export const Default = () => {
   }
 
   const checkError = (type: string) => {
+    // for the field defined, check against validations for errors
     if (type === "password") {
       if (!passwordPattern.test(formState.password) || !formState.password) {
         setErrorState((prev) => {
