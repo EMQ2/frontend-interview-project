@@ -1,0 +1,24 @@
+.form {
+  max-width: 30rem;
+  margin: 0 auto;
+  border: 1px solid black;
+  padding: 2rem;
+}
+
+.title {
+  margin-bottom: 1rem;
+}
+
+.link {
+  cursor: pointer;
+}
+
+.login-cta {
+  margin-bottom: 1rem;
+}
+
+.action {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
